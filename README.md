@@ -1,11 +1,6 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Laravel API Template
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 ## Tips
 
@@ -59,7 +54,7 @@
    In app/Http/Kernel.php replace api key with:
 
    ```sh
-   
+
    'api' => [
     \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
     'throttle:api',
@@ -77,4 +72,15 @@
         use HasApiTokens, HasFactory, Notifiable;
     }
 
+    ```
+
+    Protected routes example:
+    ```sh
+    //Protected routes
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/products', [productsController::class, 'store']);
+        Route::put('/products/{id}', [productsController::class, 'update']);
+        Route::delete('/products/{id}', [productsController::class, 'destroy']);
+    });
     ```
